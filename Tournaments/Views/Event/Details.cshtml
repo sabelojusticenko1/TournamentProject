@@ -1,0 +1,108 @@
+﻿@model Tournaments.ViewModels.EventEventDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <h2>
+            @{
+                @ViewBag.Title;
+            }
+
+        </h2>
+        @Html.ActionLink("Create event details", "Create", "EventDetail", new { id = Model.Event.EventID }, null)
+        @*@Html.HiddenFor(model => model.)*@
+        @*<input type="button" class="btn btn-primary"  onclick="@("window.location.href='" + @Url.Action("wwww","Create", "Event", new { id = (int)Model.Tournament.TournamentID}), null + "'");" />*@
+    </div>
+
+
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>Success!</strong> @TempData["AlertMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+
+    @if (TempData["AlertMessageDel"] != null)
+    {
+
+        <div class="alert alert-danger">
+            <stong>Success!</stong> @TempData["AlertMessageDel"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+</div>
+<br />
+
+<div class="container-fluid padding">
+    <div class="row">
+        <div class="row padding">
+            @foreach (var item in Model.EventDetail)
+            {
+
+            <div class="col-9 col-md-2 col-lg-5">
+                <div class="card " style="width: 28rem;">
+                    <div class="card-header bg-info text-center"><strong>@item.EventDetailName</strong></div>
+                    <div class="card-body">
+                        @*<h5 class="card-title"></h5>*@
+                        <h6 class="card-subtitle mb-2 text-muted">Event Detail Number: @item.EventDetailNumber</h6>
+
+                        @if (@item.EventDetailStatusID == 1)
+                        {
+                            <p class="card-text">Status: Active</p>
+                        }
+                        @if (@item.EventDetailStatusID == 2)
+                        {
+                            <p class="card-text">Status: Scratched</p>
+
+                        }
+                        @if (@item.EventDetailStatusID == 3)
+                        {
+                            <p class="card-text">Status: Closed</p>
+
+                        }
+
+
+                        <p class="card-text">Odds: @item.EventDetailOdd</p>
+
+                        @*<p class="card-text">Odds @item.EventDetailStatusID</p>*@
+
+                        <p class="card-text">Finishing Position: @item.FinishingPosition</p>
+                        <p class="card-text">First timer: @item.FirstTimer</p>
+                        
+                        <div class="text-center">
+                            @*<a href="#" class="btn btn-info text-center">Event details</a>*@
+                            @*<div class="row">
+
+                                @Html.ActionLink("Edit Event", "Edit", "EventDetail", new { id = item.EventID, id2 = item.EventDetailID }, null)
+                            </div>*@
+
+                            <div class="row">
+                                <input type="button" class="btn btn-primary" value="Edit" onclick="@("window.location.href='" + @Url.Action("Edit", "EventDetail", new { id = item.EventID, id2 = item.EventDetailID}) + "'");" />
+                                <input type="button" class="btn btn-danger" value="Delete " onclick="@("window.location.href='" + @Url.Action("Delete", "EventDetail", new { id = item.EventDetailID}) + "'");" />
+                            </div>
+                            <br />
+                        </div>
+                        @*<a href="#" class="card-link">Another link</a>*@
+                    </div>
+                </div>
+                <br />
+                @*<br />*@
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to events", "List", "Event", new { id = Model.Event.TournamentID  }, null)
+</div>

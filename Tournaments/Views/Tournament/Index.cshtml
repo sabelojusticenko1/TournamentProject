@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Tournaments.Models.Tournament>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tournaments</h2>
+
+
+<div class="container text-center">
+    <input type="button" class="btn btn-primary" value="Create tournament" onclick="@("window.location.href='" + @Url.Action("Create", "Tournament") + "'");" />
+</div>
+<br />
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> @TempData["AlertMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["AlertMessageDel"] != null)
+{
+
+    <div class="alert alert-danger">
+        <stong>Success!</stong> @TempData["AlertMessageDel"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["AlertMessageUpdated"] != null)
+{
+
+    <div class="alert alert-success">
+        <stong>Success!</stong> @TempData["AlertMessageUpdated"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TournamentName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TournamentName)
+            </td>
+            <td>
+                
+                @Html.ActionLink("Edit", "Edit", new { id = item.TournamentID }) |
+                @Html.ActionLink("Events", "List", "Event", new { id = item.TournamentID }, null) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TournamentID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,23 @@
+﻿@model Tournaments.Models.Event
+
+<div class="card " style="width: 28rem;">
+    <div class="card-header bg-info text-center"><strong>@Model.EventName</strong></div>
+    <div class="card-body">
+        @*<h5 class="card-title"></h5>*@
+        <h6 class="card-subtitle mb-2 text-muted">Event Number: @Model.EventNumber</h6>
+        <p class="card-text">Date and Time: @Model.EventDateTime</p>
+        <p class="card-text">End Date and Time: @Model.EventEndDateTime</p>
+        <p class="card-text">Auto Close: @Model.AutoClose</p>
+        <div class="text-center">
+            @*<a href="#" class="btn btn-info text-center">Event details</a>*@
+
+            <input type="button" class="btn btn-primary" value="Edit" onclick="@("window.location.href='" + @Url.Action("Edit", "Event", new { id = Model.EventID }) + "'");" />
+            <input type="button" class="btn btn-primary" value="Event details" onclick="@("window.location.href='" + @Url.Action("Details", "Event", new { id = Model.EventID}) + "'");" />
+            <input type="button" class="btn btn-danger" value="Delete" onclick="@("window.location.href='" + @Url.Action("Delete", "Event", new { id = Model.EventID }) + "'");"/>
+            <br />
+        </div>
+        @*<a href="#" class="card-link">Another link</a>*@
+    </div>
+</div>
+<br />
+<br />
